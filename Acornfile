@@ -41,6 +41,7 @@ containers: {
         context:    "./client"
         dockerfile: "./client/Dockerfile"
         }
+        memory: 1536Mi
         dirs: "/usr/src/app": "./client"
         ports: publish: "3000:3000/http"
         env: {
