@@ -9,7 +9,7 @@ args: {
 }
 
 services: db: {
-    image: "ghcr.io/acorn-io/mongodb:v#.#-#"
+    image: "ghcr.io/acorn-io/mongodb:v6.0-2"
     serviceArgs: {
       dbName: args.mongodbname
   }
