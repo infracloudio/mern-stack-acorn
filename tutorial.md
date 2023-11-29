@@ -66,9 +66,23 @@ $ git clone https://github.com/infracloudio/mern-stack-acorn.git
 ```
 Once cloned here’s how the directory structure will look.
 
-![](./assets/mern-root-dir.png)
+```
+.
+├── Acornfile
+├── client
+│   ├── cypress
+|   |.....
+│       
+├── LICENSE
+├── mern.png
+├── README.md
+├── server
+│   ├── config.env
+|   |.....
+│   └── server.mjs
+└── tutorial.md
 
-
+```
 ### Understanding the Acornfile
 
 We have the sample MERN Application ready. Now to run the application we need an Acornfile which describes the whole application without all of the boilerplate of Kubernetes YAML files. The Acorn CLI is used to build, deploy, and operate Acorn on the Acorn cloud platform.  It also can work on any Kubernetes cluster running the open source Acorn Runtime. 
