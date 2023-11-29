@@ -1,25 +1,20 @@
-# Deploying Mern Stack Application
+# Deploying Mern Stack Application on Acorn
 
-The MERN stack is a web development framework made up of the stack of MongoDB, Express.js, React.js, and Nodejs. It is one of the several variants of the MEAN stack.
+The MERN stack, comprising MongoDB, Express.js, React.js, and Node.js, is a comprehensive web development framework, and a variant of the MEAN stack. Complementing this, [Acorn](http://www.acorn.io) serves as a user-friendly cloud computing platform, offering a substantial free sandbox accessible through GitHub registration. Designed for simplified deployment of modern cloud-native apps, Acorn leverages familiar development workflows and mainstream container tools, eliminating the complexities associated with provisioning or configuring underlying cloud resources. In essence, Acorn provides the power of Kubernetes and Terraform without the intricate setup.
 
-[Acorn](http://www.acorn.io) is a cloud computing platform with a big free sandbox that anyone can use by registering with a GitHub account. It is designed to simplify running modern  cloud-native apps on the public cloud. You use familiar development and deployment workflows based on mainstream container tools without having to deal with provisioning or configuring any underlying cloud resources. Basically it provides all the power of Kubernetes and Terraform, without any of the complexity.
+In deploying an application on Acorn, defining it as an [Acornfile](https://docs.acorn.io/reference/acornfile) is the initial step, resulting in an Acorn Image deployable on the platform. This tutorial guides you through provisioning a sample MERN Application on Acorn, following the standard [MongoDB sample application guide](https://www.mongodb.com/languages/mern-stack-tutorial). The application created in this walkthrough is a straightforward Record List for Employees.
 
-To deploy an application on Acorn we need to define our application as an Acornfile, which will produce the Acorn Image that we can deploy on the platform.  In this tutorial, we will explore how to provision a sample MERN Application on Acorn.
-
-If you’re the kind of person who likes to skip to the end, you can [deploy the sample application in your sandbox now](https://acorn.io/run/ghcr.io/infracloudio/mern-acorn:v1.%23.%23-%23?ref=slayer321&name=mern) and just start poking around in it.  Sandbox deployments in Acorn are restricted by size, and run for two hours, so it should provide plenty of time for you to evaluate and test anything. You can start them over as often as you like, or you can upgrade to a paid Pro account if you want to run something in production. 
-
-If you want to follow along, I’ll walk through the steps to deploy the simple MERN stack application using Acorn, which is following the standard [MongoDB sample application guide](https://www.mongodb.com/languages/mern-stack-tutorial) which creates a simple Record List for Employees.
-
+If you want to skip to the end, just click [Run in Acorn](https://acorn.io/run/ghcr.io/infracloudio/mern-acorn:v1.%23.%23-%23?ref=slayer321&name=mern) to launch the app immediately in a free sandbox environment. All you need to join is a GitHub ID to create an account.
 
 _Note: Everything shown in this tutorial can be found in [this repository](https://github.com/infracloudio/mern-stack-acorn)_.
 
 ## Pre-requisites
 
-- [Acorn CLI](https://docs.acorn.io/installation/installing)
-- Github account to sign up for the Acorn Platform.
+- Acorn CLI: The CLI allows you to interact with the Acorn Runtime as well as Acorn to deploy and manage your applications. Refer to the [Installation documentation](https://docs.acorn.io/installation/installing) to install Acorn CLI for your environment.
+- A GitHub account is required to sign up and use the Acorn Platform.
 
 ## Acorn Login
-Login to the [Acorn Platform](http://beta.acorn.io) using the Github Sign-In option with your Github user.
+Log in to the [Acorn Platform](http://beta.acorn.io) using the GitHub Sign-In option with your GitHub user.
 ![](./assets/acorn-login-page.png)
 
 After the installation of Acorn CLI for your OS, you can login to the Acorn platform.
@@ -28,15 +23,15 @@ $ acorn login beta.acorn.io
 ```
 
 ## Create the MERN Application
-In this post we will create a simple MERN app from the [MongoDB sample application guide](https://www.mongodb.com/languages/mern-stack-tutorial). It is a simple application that provides standard CRUD features which act as a Record List for Employees.
+In this tutorial we will create a simple MERN app from the [MongoDB sample application guide](https://www.mongodb.com/languages/mern-stack-tutorial). It is a simple application that provides standard CRUD features which act as a Record List for Employees.
 
 In the Acorn platform, there are two ways you can try this sample application.
 1. Using Acorn platform dashboard.
 2. Using CLI
 
-The First way is the easiest one where, in just a few clicks you can deploy the MERN application on the platform and start using it. However, if you want to customize the application or want to understand how you can run your own MERN applications using Acorn, use the second option.
+The first way is the easiest one where, in just a few clicks you can deploy the MERN application on the platform and start using it. However, if you want to customize the application or want to understand how you can run your own MERN applications using Acorn, use the second option.
 
-## Running the application using Dashboard
+## Deploying Using Acorn Dashboard
 
 In this option you use the published Acorn application image to deploy the MERN sample application in just a few clicks. It allows you to deploy your applications faster without any additional configurations. Let us see below how you can deploy the mern app to the Acorn platform dashboard.
 
@@ -47,9 +42,9 @@ In this option you use the published Acorn application image to deploy the MERN 
 ![](./assets/select-from-acorn-image.png)
 
    3.2. Provide a name "Mern Sample Acorn”, use the default Region and provide the URL for the Acorn image and click Create.
-```
-ghcr.io/infracloudio/mern-acorn:v1.#.#-#
-```
+   ```
+   ghcr.io/infracloudio/mern-acorn:v1.#.#-#
+   ```
 ![](./assets/mern-deployment-preview.png)
 
 _Note: The App will be deployed in the Acorn Sandbox Environment. As the App is provisioned on AcornPlatform in the sandbox environment it will only be available for 2 hrs and after that it will be shutdown. Upgrade to a pro account to keep it running longer_.
@@ -61,7 +56,7 @@ _Note: The App will be deployed in the Acorn Sandbox Environment. As the App is 
    ![](./assets/mern-main-app.png)
 
 
-## Running the Application using acorn CLI
+## Deploying Using Acorn CLI
 As mentioned previously, running the acorn application using CLI lets you understand the Acornfile. With the CLI option, you can customize the sample app to your requirement or use your Acorn knowledge to run your own MERN application.
 
 To run the application using CLI you first need to clone the source code repository on your machine.
@@ -81,7 +76,60 @@ We have the sample MERN Application ready. Now to run the application we need an
 
 Below is the Acornfile for deploying the Mern app that we created earlier:
 
-![](./assets/mern-acornfile.png)
+```
+args: {
+  mongodbname: "mongodb"
+}
+
+services: db: {
+    image: "ghcr.io/acorn-io/mongodb:v#.#-#"
+    serviceArgs: {
+      dbName: args.mongodbname
+  }
+}
+containers: {
+   server: {
+      build: {
+         context:    "./server"
+         dockerfile: "./server/Dockerfile"
+      }
+      dirs: "/usr/src/app": "./server"
+      ports: publish: "5050:5050/http"
+      if args.dev{
+      dirs: {
+         "/usr/src/app": "./server"
+      }
+      }
+      env: {
+         DB_HOST: "@{service.db.address}"
+         DB_PORT: "@{service.db.port.27017}"
+         DB_NAME: "@{service.db.data.dbName}"
+         DB_USER: "@{service.db.secrets.admin.username}"
+         DB_PASS: "@{service.db.secrets.admin.password}"
+      }
+      consumes: ["db"]
+   }
+   client: {
+      build: {
+         context:    "./client"
+         dockerfile: "./client/Dockerfile"
+      }
+      memory: 1536Mi
+      dirs: "/usr/src/app": "./client"
+      ports: publish: "3000:3000/http"
+      env: {
+         REACT_APP_SERVER_HOST: "@{services.server.endpoint}"
+      }
+      if args.dev{
+      dirs: {
+         "/usr/src/app": "./client"
+         }
+      }
+      dependsOn: ["server"]
+   }
+
+}
+```
 
 There are 3 requirements for running MERN Application
 - Client
@@ -157,7 +205,6 @@ Once the application is built and pushed you can use those images to run your ap
 1. The App is provisioned on Acorn Platform and is available for two hours. Upgrade to Pro account for anything you want to keep running longer.
 2. After deploying you can edit the Acorn Application or remove it if no longer needed. Click the Edit option to edit your Acorn's Image. Toggle the Advanced Options switch for additional edit options.
 3. Remove the Acorn by selecting the Remove option from your Acorn dashboard.
-
 
 ## Conclusion
 In this tutorial we show how we can use the Acornfile and get our Mern application up and running and it’s very easy to make changes to the Application file when you are developing it without the need of restarting your application. And If you are looking to run the application directly you can run it on Acorn Platform by providing the image name. 
