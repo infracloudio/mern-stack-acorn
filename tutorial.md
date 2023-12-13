@@ -4,7 +4,9 @@ The MERN stack, comprising MongoDB, Express.js, React.js, and Node.js, is a comp
 
 In deploying an application on Acorn, defining it as an [Acornfile](https://docs.acorn.io/reference/acornfile) is the initial step, resulting in an Acorn Image deployable on the platform. This tutorial guides you through provisioning a sample MERN Application on Acorn, following the standard [MongoDB sample application guide](https://www.mongodb.com/languages/mern-stack-tutorial). The application created in this walkthrough is a Record List for Employees.
 
-If you want to skip to the end, just click [Run in Acorn](https://acorn.io/run/ghcr.io/infracloudio/mern-acorn:v1.%23.%23-%23?ref=slayer321&name=mern) to launch the app immediately in a free sandbox environment. All you need to join is a GitHub ID to create an account.
+If you want to skip to the end, just click the button below to launch the app immediately in a free sandbox environment. All you need to join is a GitHub ID to create an account.
+
+[![Run in Acorn](https://acorn.io/v1-ui/run/badge?image=ghcr.io+infracloudio+mern-acorn:v1.%23.%23-%23&ref=samkulkarni20)](https://acorn.io/run/ghcr.io/infracloudio/mern-acorn:v1.%23.%23-%23?ref=samkulkarni20&name=mern-stack)
 
 _Note: Everything shown in this tutorial can be found in [this repository](https://github.com/infracloudio/mern-stack-acorn)_.
 
